@@ -1,8 +1,18 @@
 # pylint:disable=C0111,C0103
 
+
 def students_from_city(db, city):
     """return a list of students from a specific city"""
-    pass  # YOUR CODE HERE
+    query = '''SELECT students.first_name
+    FROM students
+    WHERE students.birth_city = ?
+    '''
+    db.execute(query, (city,))
+    students = db.fetchall()
+    students_list = [student[0] for student in students]
+    return students_list
+
+
 
 
 # To test your code, you can **run it** before running `make`
